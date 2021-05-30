@@ -146,12 +146,12 @@ def login():
 def logout():
     logout_user()
     flash("Successfully Logged out!")
-    return redirect('/login')
+    return redirect('/')
 
 
 @app.route('/')
 def index():
-    return render_template('index.html', current_user=current_user)
+    return render_template('Index.html', current_user=current_user)
 
 
 @app.route('/news', methods=['GET', 'POST'])
@@ -186,6 +186,7 @@ def news():
 
 
 @app.route('/addblog/<int:user_id>', methods=['POST', 'GET'])
+@login_required
 def addblog(user_id):
     if request.method == "POST":
         user_id = user_id
@@ -297,14 +298,18 @@ def addques():
 
 
 @app.route('/submitquiz/<int:user_id>', methods=['POST', 'GET'])
+@login_required
 def submitquizget(user_id):
     if request.method == "GET":
         return render_template('quiz.html', q=None, current_user=current_user)
 
 
 @app.route('/submitquiz/<int:user_id>/<domain>', methods=['POST', 'GET'])
+@login_required
 def submitquiz(user_id, domain):
-    qlist = Questions.query.filter_by(domain=domain).all()
+    qlist = Questions.query.filter_by(domain=domain).order_by(
+        Questions.id.desc()).limit(5).all()
+
     # random_question_list = random.sample(qlist, 5)
     question_list = qlist
     if request.method == "GET":
@@ -399,7 +404,6 @@ def submitquiz(user_id, domain):
             user.score = 0
 
         current_quiz_score = count
-        max_score = len(question_list)
         user.score = user.score + count
         db.session.commit()
 
@@ -407,6 +411,7 @@ def submitquiz(user_id, domain):
 
 
 @app.route('/todolist/<int:user_id>', methods=['POST', 'GET'])
+@login_required
 def todolist(user_id):
     show = None
     if request.method == "POST":
@@ -420,6 +425,7 @@ def todolist(user_id):
 
 
 @app.route('/showtodolist/<int:user_id>', methods=['POST', 'GET'])
+@login_required
 def showtodolist(user_id):
     user = Users.query.filter_by(id=user_id).first()
     tasklist = Tasks.query.filter_by(user_id=user_id).all()
@@ -427,24 +433,25 @@ def showtodolist(user_id):
 
 
 @app.route('/deletetask/<int:user_id>/<int:task_id>', methods=['POST'])
+@login_required
 def deletetask(user_id, task_id):
     task = Tasks.query.filter_by(id=task_id, user_id=user_id).first()
     db.session.delete(task)
     db.session.commit()
-    tasklist = Tasks.query.filter_by(user_id=user_id).all()
     return redirect(f'/showtodolist/{user_id}')
 
 
 @app.route('/finishtask/<int:user_id>/<int:task_id>', methods=['POST'])
+@login_required
 def finishtask(user_id, task_id):
     task = Tasks.query.filter_by(id=task_id, user_id=user_id).first()
     task.status = "Finished"
     db.session.commit()
-    tasklist = Tasks.query.filter_by(user_id=user_id).all()
     return redirect(f'/showtodolist/{user_id}')
 
 
 @app.route('/userprofile/<int:user_id>', methods=['POST', 'GET'])
+@login_required
 def userprofile(user_id):
     user = Users.query.filter_by(id=user_id).first()
     blogs = Blog.query.filter_by(user_id=user_id).all()
@@ -457,11 +464,13 @@ def userprofile(user_id):
 
         db.session.commit()
     return render_template('profile.html', user=user, current_user=current_user, blogs=blogs)
+
+
 @app.route('/aboutus')
 def aboutus():
     return render_template('aboutus.html', current_user=current_user)
 
-# Comment
+
 if __name__ == "__main__":
     db.create_all()
     app.run(debug=True)

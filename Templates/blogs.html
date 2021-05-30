@@ -16,7 +16,7 @@
 	    <nav class="navbar navbar-dark navbar-expand-sm " style="color: #000 !important;">
 	        <div class="container">
 	                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar" style="background-color:  #000;">
-	                  <span class="navbar-toggler-icon"></span>  
+	                  <span class="navbar-toggler-icon"></span>
 	                </button>
 	            <a class="navbar-brand mr-auto" href="#"><img src="../static/img/logo.png" height="50" width="50"></a>
 				{%if current_user.is_authenticated %}
@@ -24,7 +24,7 @@
 				{% endif %}
 	            <div class="collapse navbar-collapse" id="Navbar" style="font-size: 15px;">
 					<ul class="navbar-nav mr auto" style="font-size: 15px;">
-						<li class="nav-item"><a class="nav-link" href="/"  style="color: #696969;"><span class="fa fa-home fa-lg"> </span>Home</a></li> 
+						<li class="nav-item"><a class="nav-link" href="/"  style="color: #696969;"><span class="fa fa-home fa-lg"> </span>Home</a></li>
 
 						{%if not current_user.is_authenticated %}
 						<li class="nav-item"><a class="nav-link" href="/login"  style="color: #252525;"><i class="fa fa-sign-out"></i> </span>Login</a></li>
@@ -41,7 +41,8 @@
 						{% endif %}
 
 						<li class="nav-item"><a class="nav-link" href="/news"  style="color: #696969;"><i class="fa fa-file"  style="color: #696969;"></i> </span>News </a></li>
-						
+
+
 						{% if current_user.is_authenticated %}
 						<li class="nav-item"><a class="nav-link" href="/todolist/{{current_user.id}}"  style="color: #696969;"><i class="fa fa-user-md"></i> </span>To-Do List</a></li>
 						{% endif %}
@@ -54,6 +55,9 @@
 						{%if current_user.is_authenticated %}
 						<li class="nav-item"><a class="nav-link" href="/logout"   style="color: #696969;"><i class="fa fa-sign-out"  style="color:#696969;"></i> </span>Log Out </a></li>
 						{% endif %}
+
+						<li class="nav-item"><a class="nav-link" href="/aboutus"  style="color: #696969;"><i class="fa fa-info"></i> </span>About Us</a></li>
+
 						<!-- <li class="nav-item"><a class="nav-link" href="/aboutus"  style="color: #696969;"><i class="fa fa-info"></i> </span>About Us</a></li> -->
 						</ul>
 	            </div>
@@ -61,7 +65,7 @@
 	             <h2 style="color: #000;"> Updating Gen-Z</h2>
 	            </div>
 	        </div>
-	    </nav> 
+	    </nav>
 	</header>
 
 <p>
@@ -70,7 +74,7 @@
       <h1 style="color: #000;text-align: center;">Blogs</h1><br>
         <form class="card card-sm" style="background-color: #5a693d;" method="POST">
             <div class="card-body row no-gutters align-items-center">
-              
+
                 <div class="col-auto">
                     <i class="fa fa-search h4 text-body" style="color: #edc7b7;"></i>
                 </div>
@@ -117,7 +121,7 @@
 		{% endfor %}
 
 
-		
+
 		<article class="postcard yellow">
 			<a class="postcard__img_link" href="#">
 				<img class="postcard__img" src="https://picsum.photos/501/501" alt="Image Title" />
@@ -164,21 +168,21 @@
 				</div>
 				<div class="row ">
 					<div class="col-xl-8 col-md-4 col-sm-4 col-auto my-md-0 mt-5 order-sm-1 order-3 align-self-end">
-						<p class="social text-muted mb-0 pb-0 bold-text"> 
-						   <span class="mx-2"><i class="fa fa-facebook" aria-hidden="true"></i></span> 
-						   <span class="mx-2"><i class="fa fa-linkedin-square" aria-hidden="true"></i></span> 
-						   <span class="mx-2"><i class="fa fa-twitter" aria-hidden="true"></i></span> 
-						   <span class="mx-2"><i class="fa fa-instagram" aria-hidden="true"></i></span> 
+						<p class="social text-muted mb-0 pb-0 bold-text">
+						   <span class="mx-2"><i class="fa fa-facebook" aria-hidden="true"></i></span>
+						   <span class="mx-2"><i class="fa fa-linkedin-square" aria-hidden="true"></i></span>
+						   <span class="mx-2"><i class="fa fa-twitter" aria-hidden="true"></i></span>
+						   <span class="mx-2"><i class="fa fa-instagram" aria-hidden="true"></i></span>
 					   </p>
 					   <small class="rights"><span>&#174;</span>Team gen-z </small>
 					</div>
 					<div class="col-xl-2 col-md-4 col-sm-4 col-auto order-1 align-self-end ">
-						<h6 class="mt-55 mt-2 text-muted bold-text"><b>Contact Us</b></h6><small> 
+						<h6 class="mt-55 mt-2 text-muted bold-text"><b>Contact Us</b></h6><small>
 						   <span><i class="fa fa-info" aria-hidden="true"></i></span> <a href="/aboutus">About Us</a></small>
 					</div>
 					<div class="col-xl-2 col-md-4 col-sm-4 col-auto order-2 align-self-end mt-3 ">
-						<h6 class="mt-55 mt-2 text-muted bold-text"><b>Give Your Feedback</b></h6><small> 
-						   <span><i class="fa fa-envelope" aria-hidden="true"></i></span> feedback@gmail.com</small>
+						<h6 class="mt-55 mt-2 text-muted bold-text"><b>Give Your Feedback</b></h6><small>
+						   <span><i class="fa fa-envelope" aria-hidden="true"></i></span> updating.genz@gmail.com</small>
 					</div>
 				</div>
 			</div>
